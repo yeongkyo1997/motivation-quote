@@ -1,0 +1,208 @@
+.favorite-button {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9), 
+    rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  box-shadow: 
+    0 4px 12px rgba(251, 191, 36, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.favorite-button-small {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+}
+
+.favorite-button-medium {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.favorite-button-large {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.75rem;
+}
+
+.favorite-icon {
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.favorite-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+  border-color: #fbbf24;
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.1), 
+    rgba(245, 158, 11, 0.1));
+}
+
+.favorite-button:hover .favorite-icon {
+  color: #fbbf24;
+  transform: rotate(20deg);
+}
+
+.favorite-button:active {
+  transform: scale(0.95);
+}
+
+.favorite-button.is-favorite {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.25), 
+    rgba(245, 158, 11, 0.2));
+  border-color: rgba(251, 191, 36, 0.5);
+  animation: starBurst 0.5s ease;
+  box-shadow: 
+    0 6px 16px rgba(251, 191, 36, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.favorite-button.is-favorite .favorite-icon {
+  color: #fbbf24;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+  animation: starSpin 0.5s ease;
+}
+
+.favorite-button.is-favorite:hover {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.2), 
+    rgba(245, 158, 11, 0.2));
+  border-color: #f59e0b;
+}
+
+.favorite-button.is-favorite:hover .favorite-icon {
+  transform: rotate(-20deg) scale(1.1);
+}
+
+@keyframes starBurst {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes starSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.favorite-button::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.favorite-button.is-favorite::before {
+  opacity: 0.2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+.favorite-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding-right: 0.5rem;
+}
+
+.favorite-button.is-favorite::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0);
+  animation: glow 0.5s ease;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0);
+  }
+}
+
+[data-theme='dark'] .favorite-button {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .favorite-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.15), 
+    rgba(245, 158, 11, 0.15));
+}
+
+[data-theme='dark'] .favorite-button.is-favorite {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.2), 
+    rgba(245, 158, 11, 0.2));
+}
+
+@media (max-width: 640px) {
+  .favorite-button-small {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.1rem;
+  }
+
+  .favorite-button-medium {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.35rem;
+  }
+
+  .favorite-button-large {
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 1.6rem;
+  }
+}

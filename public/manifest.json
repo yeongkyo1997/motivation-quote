@@ -1,0 +1,44 @@
+{
+  "short_name": "Wisdom",
+  "name": "Wisdom Whispers - Daily Inspiration",
+  "description": "Where great minds inspire yours. Get daily motivational quotes and wisdom.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "background_color": "#f9fafb",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#6366f1",
+  "orientation": "portrait",
+  "categories": ["lifestyle", "productivity"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Quote",
+      "short_name": "New",
+      "description": "Get a new inspirational quote",
+      "url": "/?action=new",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

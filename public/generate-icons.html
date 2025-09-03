@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+</head>
+<body>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <canvas id="canvas512" width="512" height="512"></canvas>
+    
+    <script>
+        function generateIcon(size) {
+            const canvas = document.getElementById(`canvas${size}`);
+            const ctx = canvas.getContext('2d');
+            
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#6366f1');
+            gradient.addColorStop(0.5, '#8b5cf6');
+            gradient.addColorStop(1, '#ec4899');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // White circle background for text
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/3, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fill();
+            
+            // Text
+            ctx.fillStyle = '#6366f1';
+            ctx.font = `bold ${size/4}px Inter, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('W', size/2, size/2 - size/12);
+            
+            ctx.font = `${size/10}px Inter, sans-serif`;
+            ctx.fillText('WISDOM', size/2, size/2 + size/8);
+            
+            // Download link
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `icon-${size}.png`;
+                a.textContent = `Download ${size}x${size} icon`;
+                document.body.appendChild(a);
+                document.body.appendChild(document.createElement('br'));
+            });
+        }
+        
+        generateIcon(192);
+        generateIcon(512);
+    </script>
+</body>
+</html>
