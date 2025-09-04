@@ -6,7 +6,7 @@ interface ApiService {
 }
 
 class QuoteApiService implements ApiService {
-  private readonly koreanUrl = '/api/quote';
+  private readonly koreanUrl = 'https://random-quote.hyobb.com/';
   private readonly englishUrl = 'https://random-quotes-freeapi.vercel.app/api/random';
   private readonly timeout = 5000;
 
