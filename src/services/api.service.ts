@@ -7,7 +7,7 @@ interface ApiService {
 
 class QuoteApiService implements ApiService {
   private readonly koreanUrl = '/api/quote';
-  private readonly englishUrl = 'https://geek-jokes.sameerkumar.website/api?format=json';
+  private readonly englishUrl = 'https://random-quotes-freeapi.vercel.app/api/random';
   private readonly timeout = 5000;
 
   async fetchQuote(language: Language): Promise<ApiResult<string>> {
@@ -64,7 +64,10 @@ class QuoteApiService implements ApiService {
         }
         quote = quoteObj.respond;
       } else {
-        quote = result.joke || result || 'No joke available';
+        // New API returns {quote: string, author: string, id: number}
+        const englishQuote = result.quote || 'No quote available';
+        const author = result.author || 'Unknown';
+        quote = `${englishQuote} - ${author}`;
       }
 
       return { success: true, data: quote };
