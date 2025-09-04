@@ -240,6 +240,17 @@
 
 .saved-quote-content {
   margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin: -0.5rem;
+}
+
+.saved-quote-content:hover {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.05), 
+    rgba(139, 92, 246, 0.05));
+  transform: scale(1.02);
 }
 
 .saved-quote-text {

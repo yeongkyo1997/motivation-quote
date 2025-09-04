@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { SavedQuote } from '../types/saved';
 import { useI18n } from '../contexts/I18nContext';
 import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
+import { ConfirmDialog } from './ConfirmDialog';
+import { QuoteModal } from './QuoteModal';
 import './SavedQuotesDrawer.css';
+import './ConfirmDialog.css';
 
 interface SavedQuotesDrawerProps {
   isOpen: boolean;
@@ -28,6 +31,8 @@ export function SavedQuotesDrawer({
   const { copyToClipboard, isCopied } = useCopyToClipboard();
   const [activeTab, setActiveTab] = useState<'all' | 'favorites'>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [selectedQuote, setSelectedQuote] = useState<SavedQuote | null>(null);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -128,7 +133,11 @@ export function SavedQuotesDrawer({
             <div className="saved-quotes-list">
               {filteredQuotes.map(quote => (
                 <div key={quote.id} className="saved-quote-item">
-                  <div className="saved-quote-content">
+                  <div 
+                    className="saved-quote-content"
+                    onClick={() => setSelectedQuote(quote)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <p className="saved-quote-text">"{quote.quote}"</p>
                     {quote.author && (
                       <p className="saved-quote-author">— {quote.author}</p>
@@ -167,7 +176,7 @@ export function SavedQuotesDrawer({
         {quotes.length > 0 && (
           <div className="saved-drawer-footer">
             <button
-              onClick={onClearAll}
+              onClick={() => setShowConfirmDialog(true)}
               className="clear-all-btn"
             >
               {t.clearAll}
@@ -175,6 +184,24 @@ export function SavedQuotesDrawer({
           </div>
         )}
       </div>
+      
+      <ConfirmDialog
+        isOpen={showConfirmDialog}
+        message={t.confirmDeleteAll}
+        confirmText={t.confirm}
+        cancelText={t.cancel}
+        onConfirm={() => {
+          onClearAll();
+          setShowConfirmDialog(false);
+        }}
+        onCancel={() => setShowConfirmDialog(false)}
+      />
+      
+      <QuoteModal
+        isOpen={!!selectedQuote}
+        quote={selectedQuote}
+        onClose={() => setSelectedQuote(null)}
+      />
     </>
   );
 }

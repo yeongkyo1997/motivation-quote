@@ -33,6 +33,9 @@ export interface Translation {
   weeksAgo: string;
   monthsAgo: string;
   yearsAgo: string;
+  confirmDeleteAll: string;
+  confirm: string;
+  cancel: string;
 }
 
 export interface I18nConfig {

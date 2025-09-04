@@ -41,10 +41,8 @@ export const useSavedQuotes = (): SavedQuotesState & SavedQuotesActions => {
   }, [loadQuotes]);
 
   const clearAll = useCallback(() => {
-    if (window.confirm('Are you sure you want to delete all saved quotes?')) {
-      savedQuotesService.clearAll();
-      loadQuotes();
-    }
+    savedQuotesService.clearAll();
+    loadQuotes();
   }, [loadQuotes]);
 
   const isQuoteSaved = useCallback((quote: string): boolean => {

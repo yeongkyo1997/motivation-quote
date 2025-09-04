@@ -6,7 +6,7 @@ export class I18nService {
       appTitle: 'Wisdom Whispers',
       appSubtitle: '위대한 마음이 당신에게 영감을 줍니다',
       getNewQuote: '새로운 명언',
-      copy: '📋 복사',
+      copy: '복사',
       copied: '✓ 복사됨!',
       share: '공유',
       tweet: '🐦 트윗',
@@ -34,13 +34,16 @@ export class I18nService {
       daysAgo: '일 전',
       weeksAgo: '주 전',
       monthsAgo: '개월 전',
-      yearsAgo: '년 전'
+      yearsAgo: '년 전',
+      confirmDeleteAll: '저장된 모든 명언을 삭제하시겠습니까?',
+      confirm: '확인',
+      cancel: '취소'
     },
     en: {
       appTitle: 'Daily Jokes',
       appSubtitle: 'Where laughter meets wisdom',
       getNewQuote: 'Get New Joke',
-      copy: '📋 Copy',
+      copy: 'Copy',
       copied: '✓ Copied!',
       share: 'Share',
       tweet: '🐦 Tweet',
@@ -68,7 +71,10 @@ export class I18nService {
       daysAgo: ' days ago',
       weeksAgo: ' weeks ago',
       monthsAgo: ' months ago',
-      yearsAgo: ' years ago'
+      yearsAgo: ' years ago',
+      confirmDeleteAll: 'Are you sure you want to delete all saved quotes?',
+      confirm: 'Confirm',
+      cancel: 'Cancel'
     }
   };
 
