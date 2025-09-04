@@ -6,8 +6,8 @@ interface ApiService {
 }
 
 class QuoteApiService implements ApiService {
-  private readonly koreanUrl = 'https://api.quotable.io/random';
-  private readonly englishUrl = 'https://api.quotable.io/random';
+  private readonly koreanUrl = '/api/quote';
+  private readonly englishUrl = 'https://geek-jokes.sameerkumar.website/api?format=json';
   private readonly timeout = 5000;
 
   async fetchQuote(language: Language): Promise<ApiResult<string>> {
@@ -39,11 +39,32 @@ class QuoteApiService implements ApiService {
       const result = await response.json();
       
       let quote: string;
-      // Quotable API response format
-      if (result.content && result.author) {
-        quote = `${result.content} - ${result.author}`;
+      if (language === 'ko') {
+        const koreanResponse = result as QuoteResponse;
+        if (!Array.isArray(koreanResponse) || koreanResponse.length < 2) {
+          return {
+            success: false,
+            error: {
+              message: 'Invalid response format',
+              code: 'INVALID_RESPONSE',
+            },
+          };
+        }
+        const statusObj = koreanResponse[0] as {result?: string};
+        const quoteObj = koreanResponse[1] as {respond?: string};
+        
+        if (statusObj.result !== 'success' || !quoteObj.respond) {
+          return {
+            success: false,
+            error: {
+              message: 'Failed to fetch quote',
+              code: 'FETCH_FAILED',
+            },
+          };
+        }
+        quote = quoteObj.respond;
       } else {
-        quote = result.content || result || 'No quote available';
+        quote = result.joke || result || 'No joke available';
       }
 
       return { success: true, data: quote };
